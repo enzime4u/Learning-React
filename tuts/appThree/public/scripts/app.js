@@ -1,17 +1,28 @@
 'use strict';
 
+var app = {
+    title: 'What Should I do?',
+    subtitle: '',
+    options: []
+};
+
 var template = React.createElement(
     'div',
     null,
     React.createElement(
         'h1',
         null,
-        'Indecision App'
+        app.title
+    ),
+    app.subtitle && React.createElement(
+        'p',
+        null,
+        app.subtitle
     ),
     React.createElement(
         'p',
         null,
-        'This is some info'
+        app.options.length > 0 ? 'Here are your options' : 'No Options'
     ),
     React.createElement(
         'ol',
@@ -19,15 +30,34 @@ var template = React.createElement(
         React.createElement(
             'li',
             null,
-            'Item One'
+            'Continue to Code'
         ),
         React.createElement(
             'li',
             null,
-            'Item Two'
+            'Start a Project'
         )
     )
 );
+
+var user = {
+    name: 'Kent',
+    age: 31,
+    location: 'Iowa'
+};
+
+function getLocation(location) {
+    if (location) {
+        return React.createElement(
+            'p',
+            null,
+            'Location: ',
+            location
+        );
+    } else {
+        return undefined;
+    }
+}
 
 var templateTwo = React.createElement(
     'div',
@@ -35,20 +65,20 @@ var templateTwo = React.createElement(
     React.createElement(
         'h1',
         null,
-        'Kent Roth'
+        user.name ? user.name : 'Anonymous'
     ),
-    React.createElement(
+    ' //ternary',
+    user.age && user.age >= 18 && React.createElement(
         'p',
         null,
-        'Age: 31'
+        ' Age: ',
+        user.age
     ),
-    React.createElement(
-        'p',
-        null,
-        'Location: Iowa'
-    )
+    ' //logical',
+    getLocation(user.location),
+    ' // if statement'
 );
 
 var appRoot = document.getElementById('app');
 
-ReactDOM.render(templateTwo, appRoot);
+ReactDOM.render(template, appRoot);

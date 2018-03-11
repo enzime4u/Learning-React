@@ -1,23 +1,50 @@
 
+
+var app = {
+    title: 'What Should I do?',
+    subtitle: '',
+    options:[]
+};
+
+
 var template = (
     <div>
-        <h1>Indecision App</h1>
-        <p>This is some info</p>
+        <h1>{app.title}</h1>
+        {app.subtitle && <p>{app.subtitle}</p>}
+        <p>{app.options.length > 0 ? 'Here are your options' : 'No Options'}</p>
+
+
         <ol>
-            <li>Item One</li>
-            <li>Item Two</li>
+            <li>Continue to Code</li>
+            <li>Start a Project</li>
         </ol>
     </div>
 );
 
+
+
+var user = {
+    name: 'Kent',
+    age: 31,
+    location: 'Iowa',
+};
+
+function getLocation(location) {
+    if (location) {
+        return <p>Location: {location}</p>;
+    } else {
+        return undefined;
+    }
+}
+
 var templateTwo = (
     <div>
-        <h1>Kent Roth</h1>
-        <p>Age: 31</p>
-        <p>Location: Iowa</p>
+        <h1>{user.name ? user.name : 'Anonymous'}</h1> //ternary
+        {(user.age && user.age >= 18) && <p> Age: {user.age}</p>} //logical
+        {getLocation(user.location)} // if statement
     </div>
 );
 
 var appRoot = document.getElementById('app');
 
-ReactDOM.render(templateTwo, appRoot);
+ReactDOM.render(template, appRoot);
