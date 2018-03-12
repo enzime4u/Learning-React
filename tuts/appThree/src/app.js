@@ -1,29 +1,27 @@
 
 
-var app = {
+const app = {
     title: 'What Should I do?',
     subtitle: '',
     options:[]
 };
 
 
-var template = (
-    <div>
-        <h1>{app.title}</h1>
-        {app.subtitle && <p>{app.subtitle}</p>}
-        <p>{app.options.length > 0 ? 'Here are your options' : 'No Options'}</p>
+const template = <div>
+    <h1>{app.title}</h1>
+    {app.subtitle && <p>{app.subtitle}</p>}
+    <p>{app.options.length > 0 ? 'Here are your options' : 'No Options'}</p>
 
 
-        <ol>
-            <li>Continue to Code</li>
-            <li>Start a Project</li>
-        </ol>
-    </div>
-);
+    <ol>
+        <li>Continue to Code</li>
+        <li>Start a Project</li>
+    </ol>
+</div>;
 
 
 
-var user = {
+const user = {
     name: 'Kent',
     age: 31,
     location: 'Iowa',
@@ -37,7 +35,7 @@ function getLocation(location) {
     }
 }
 
-var templateTwo = (
+const templateTwo = (
     <div>
         <h1>{user.name ? user.name : 'Anonymous'}</h1> //ternary
         {(user.age && user.age >= 18) && <p> Age: {user.age}</p>} //logical
@@ -45,6 +43,6 @@ var templateTwo = (
     </div>
 );
 
-var appRoot = document.getElementById('app');
+const appRoot = document.getElementById('app');
 
 ReactDOM.render(template, appRoot);
