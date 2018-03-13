@@ -1,5 +1,4 @@
 
-
 const app = {
     title: 'What Should I do?',
     subtitle: '',
@@ -12,37 +11,34 @@ const template = <div>
     {app.subtitle && <p>{app.subtitle}</p>}
     <p>{app.options.length > 0 ? 'Here are your options' : 'No Options'}</p>
 
-
     <ol>
         <li>Continue to Code</li>
         <li>Start a Project</li>
     </ol>
 </div>;
 
-
-
-const user = {
-    name: 'Kent',
-    age: 31,
-    location: 'Iowa',
+let count = 0;
+const addOne = () => {
+    console.log('addOne');
 };
-
-function getLocation(location) {
-    if (location) {
-        return <p>Location: {location}</p>;
-    } else {
-        return undefined;
-    }
-}
+const minusOne = () => {
+    console.log('minusOne');
+};
+const reset = () => {
+    console.log('reset');
+};
 
 const templateTwo = (
     <div>
-        <h1>{user.name ? user.name : 'Anonymous'}</h1> //ternary
-        {(user.age && user.age >= 18) && <p> Age: {user.age}</p>} //logical
-        {getLocation(user.location)} // if statement
+        <h1>Count: {count} </h1>
+        <button onClick={addOne}>+1</button>
+        <button onClick={minusOne}>-1</button>
+        <button onClick={reset}>reset</button>
     </div>
 );
 
+
+
 const appRoot = document.getElementById('app');
 
-ReactDOM.render(template, appRoot);
+ReactDOM.render(templateTwo, appRoot);
