@@ -4,41 +4,50 @@ const app = {
     subtitle: '',
     options:[]
 };
+const onFormSubmit = (e) => {
+    e.preventDefault();
 
-
-const template = <div>
-    <h1>{app.title}</h1>
-    {app.subtitle && <p>{app.subtitle}</p>}
-    <p>{app.options.length > 0 ? 'Here are your options' : 'No Options'}</p>
-
-    <ol>
-        <li>Continue to Code</li>
-        <li>Start a Project</li>
-    </ol>
-</div>;
-
-let count = 0;
-const addOne = () => {
-    console.log('addOne');
+    const option = e.target.elements.option.value;
+    if (option) {
+        app.options.push(option);
+        e.target.elements.option.value = '';
+        renderApp()
+    }
 };
-const minusOne = () => {
-    console.log('minusOne');
-};
-const reset = () => {
-    console.log('reset');
-};
+    const onRemoveAll = () => {
+        app.options = [];
+        renderApp()
+    };
 
-const templateTwo = (
-    <div>
-        <h1>Count: {count} </h1>
-        <button onClick={addOne}>+1</button>
-        <button onClick={minusOne}>-1</button>
-        <button onClick={reset}>reset</button>
-    </div>
-);
+const renderApp = () => {
+    const template = <div>
+        <h1>{app.title}</h1>
+        {app.subtitle && <p>{app.subtitle}</p>}
+        <p>{app.options.length > 0 ? 'Here are your options' : 'No Options'}</p>
+        <p>{app.options.length}</p>
+        <button onClick={onRemoveAll}>Reset All</button>
+
+
+
+        <ol>
+            {
+                app.options.map((options) => {
+                return <li key={options}>{options}</li>
+                })
+            }
+        </ol>
+        <form onSubmit={onFormSubmit}>
+            <input type={'text'} name={'option'}/>
+            <button>Add Option</button>
+        </form>
+
+    </div>;
+
+            ReactDOM.render(template, appRoot)
+};
 
 
 
 const appRoot = document.getElementById('app');
 
-ReactDOM.render(templateTwo, appRoot);
+renderApp();
