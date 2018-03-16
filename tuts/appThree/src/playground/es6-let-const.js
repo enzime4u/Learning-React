@@ -48,4 +48,4 @@ const renderCounterApp = () => {
     ReactDOM.render(templateTwo, appRoot);
 };
 
-renderCounterApp()
+renderCounterApp();
