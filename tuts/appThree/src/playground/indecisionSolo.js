@@ -2,11 +2,13 @@ class IndecisionApp extends React.Component {
     constructor(props) {
         super(props);
         this.deleteOption = this.deleteOption.bind(this);
+        this.pickOption = this.pickOption.bind(this);
         this.state = {
             options:['One', 'Two']
         }
     }
 
+    // Delete Option.  Needs to clear the array
     deleteOption() {
         this.setState(() => {
             return {
@@ -15,11 +17,23 @@ class IndecisionApp extends React.Component {
         });
     }
 
+    // Pick Option.  Needs to pick a random number and alert
+    pickOption() {
+        const rando = Math.floor(Math.random() * this.state.options.length);
+        const option = this.state.options[rando];
+        alert(option);
+    }
+
+    // Add Option.  Needs to add an option to the array.  Also, needs to handle errors.
+
+
     render() {
         return (
             <div>
                 <Header />
-                <Action />
+                <Action
+                pickOption={this.pickOption}
+                />
                 <Options
                 deleteOption={this.deleteOption}
                 />
@@ -31,7 +45,7 @@ class IndecisionApp extends React.Component {
 }
 
 
-// Header - title and subtitle
+// Header - title and subtitle.  Once app completed pass in title and subtitle from const as challenge
 class Header extends React.Component {
     render() {
         return (
@@ -48,7 +62,9 @@ class Action extends React.Component {
     render() {
         return (
             <div>
-                <button>Pick Option</button>
+                <button
+                onClick={this.props.handlePick}
+                >Pick Option</button>
             </div>
         )
     }

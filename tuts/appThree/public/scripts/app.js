@@ -17,11 +17,15 @@ var IndecisionApp = function (_React$Component) {
         var _this = _possibleConstructorReturn(this, (IndecisionApp.__proto__ || Object.getPrototypeOf(IndecisionApp)).call(this, props));
 
         _this.deleteOption = _this.deleteOption.bind(_this);
+        _this.pickOption = _this.pickOption.bind(_this);
         _this.state = {
             options: ['One', 'Two']
         };
         return _this;
     }
+
+    // Delete Option.  Needs to clear the array
+
 
     _createClass(IndecisionApp, [{
         key: 'deleteOption',
@@ -32,6 +36,20 @@ var IndecisionApp = function (_React$Component) {
                 };
             });
         }
+
+        // Pick Option.  Needs to pick a random number and alert
+
+    }, {
+        key: 'pickOption',
+        value: function pickOption() {
+            var rando = Math.floor(Math.random() * this.state.options.length);
+            var option = this.state.options[rando];
+            alert(option);
+        }
+
+        // Add Option.  Needs to add an option to the array.  Also, needs to handle errors.
+
+
     }, {
         key: 'render',
         value: function render() {
@@ -39,7 +57,9 @@ var IndecisionApp = function (_React$Component) {
                 'div',
                 null,
                 React.createElement(Header, null),
-                React.createElement(Action, null),
+                React.createElement(Action, {
+                    pickOption: this.pickOption
+                }),
                 React.createElement(Options, {
                     deleteOption: this.deleteOption
                 }),
@@ -52,7 +72,7 @@ var IndecisionApp = function (_React$Component) {
     return IndecisionApp;
 }(React.Component);
 
-// Header - title and subtitle
+// Header - title and subtitle.  Once app completed pass in title and subtitle from const as challenge
 
 
 var Header = function (_React$Component2) {
@@ -107,7 +127,9 @@ var Action = function (_React$Component3) {
                 null,
                 React.createElement(
                     'button',
-                    null,
+                    {
+                        onClick: this.props.handlePick
+                    },
                     'Pick Option'
                 )
             );
