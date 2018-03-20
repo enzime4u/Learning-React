@@ -16,18 +16,16 @@ var IndecisionApp = function (_React$Component) {
 
         var _this = _possibleConstructorReturn(this, (IndecisionApp.__proto__ || Object.getPrototypeOf(IndecisionApp)).call(this, props));
 
-        _this.handleDeleteOptions = _this.handleDeleteOptions.bind(_this);
-        _this.handlePick = _this.handlePick.bind(_this);
+        _this.deleteOption = _this.deleteOption.bind(_this);
         _this.state = {
-            options: ['One ', ' Two']
-
+            options: ['One', 'Two']
         };
         return _this;
     }
 
     _createClass(IndecisionApp, [{
-        key: 'handleDeleteOptions',
-        value: function handleDeleteOptions() {
+        key: 'deleteOption',
+        value: function deleteOption() {
             this.setState(function () {
                 return {
                     options: []
@@ -35,30 +33,17 @@ var IndecisionApp = function (_React$Component) {
             });
         }
     }, {
-        key: 'handlePick',
-        value: function handlePick() {
-            var randomNum = Math.floor(Math.random() * this.state.options.length);
-            var option = this.state.options[randomNum];
-            alert(option);
-        }
-    }, {
         key: 'render',
         value: function render() {
-            var title = 'Indecision';
-            var subtitle = 'I shall decide what you do.';
-
             return React.createElement(
                 'div',
                 null,
-                React.createElement(Header, { title: title, subtitle: subtitle }),
-                React.createElement(Action, {
-                    handlePick: this.handlePick,
-                    hasOptions: this.state.options.length > 0
-                }),
+                React.createElement(Header, null),
+                React.createElement(Action, null),
                 React.createElement(Options, {
-                    options: this.state.options,
-                    handleDeleteOptions: this.handleDeleteOptions
+                    deleteOption: this.deleteOption
                 }),
+                React.createElement(Option, null),
                 React.createElement(AddOption, null)
             );
         }
@@ -66,6 +51,9 @@ var IndecisionApp = function (_React$Component) {
 
     return IndecisionApp;
 }(React.Component);
+
+// Header - title and subtitle
+
 
 var Header = function (_React$Component2) {
     _inherits(Header, _React$Component2);
@@ -85,12 +73,12 @@ var Header = function (_React$Component2) {
                 React.createElement(
                     'h1',
                     null,
-                    this.props.title
+                    'Indecision App'
                 ),
                 React.createElement(
-                    'h2',
+                    'h3',
                     null,
-                    this.props.subtitle
+                    'I shall decide what you do.'
                 )
             );
         }
@@ -98,6 +86,9 @@ var Header = function (_React$Component2) {
 
     return Header;
 }(React.Component);
+
+// Action - Pick options button
+
 
 var Action = function (_React$Component3) {
     _inherits(Action, _React$Component3);
@@ -116,11 +107,8 @@ var Action = function (_React$Component3) {
                 null,
                 React.createElement(
                     'button',
-                    {
-                        onClick: this.props.handlePick,
-                        disabled: !this.props.hasOptions
-                    },
-                    'What Should I Do?'
+                    null,
+                    'Pick Option'
                 )
             );
         }
@@ -128,6 +116,9 @@ var Action = function (_React$Component3) {
 
     return Action;
 }(React.Component);
+
+// Options - remove options button and maps the options to option
+
 
 var Options = function (_React$Component4) {
     _inherits(Options, _React$Component4);
@@ -146,18 +137,20 @@ var Options = function (_React$Component4) {
                 null,
                 React.createElement(
                     'button',
-                    { onClick: this.props.handleDeleteOptions },
-                    'Remove all options'
-                ),
-                this.props.options.map(function (option) {
-                    return React.createElement(Option, { key: option, optionText: option });
-                })
+                    {
+                        onClick: this.props.deleteOption
+                    },
+                    'Remove Options'
+                )
             );
         }
     }]);
 
     return Options;
 }(React.Component);
+
+// Option - displays the options
+
 
 var Option = function (_React$Component5) {
     _inherits(Option, _React$Component5);
@@ -174,13 +167,20 @@ var Option = function (_React$Component5) {
             return React.createElement(
                 'div',
                 null,
-                this.props.optionText
+                React.createElement(
+                    'p',
+                    null,
+                    'Options'
+                )
             );
         }
     }]);
 
     return Option;
 }(React.Component);
+
+// Add Option - Form and adds typed option to Options
+
 
 var AddOption = function (_React$Component6) {
     _inherits(AddOption, _React$Component6);
@@ -192,30 +192,16 @@ var AddOption = function (_React$Component6) {
     }
 
     _createClass(AddOption, [{
-        key: 'handleAddOption',
-        value: function handleAddOption(e) {
-            e.preventDefault();
-
-            var option = e.target.elements.option.value.trim();
-            if (option) {
-                alert(option);
-            }
-        }
-    }, {
         key: 'render',
         value: function render() {
             return React.createElement(
-                'div',
+                'form',
                 null,
+                React.createElement('input', { type: 'text', name: 'option' }),
                 React.createElement(
-                    'form',
-                    { onSubmit: this.handleAddOption },
-                    React.createElement('input', { type: 'text', name: 'option' }),
-                    React.createElement(
-                        'button',
-                        null,
-                        'Add Option'
-                    )
+                    'button',
+                    null,
+                    'Add Option'
                 )
             );
         }
